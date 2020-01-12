@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Ejemplo de columna JSON en MySQL
  *
  * @author J. Manuel Colmenar
  */
