@@ -49,14 +49,14 @@ public class DatabaseLoader implements CommandLineRunner {
         muestraDatos(productos);
 
         // Recupera productos por marca
-        String marca = "Apple";
+        String marca = "HP";
         productos = repository.findByMarca(marca);
         System.out.println("Productos "+marca+":");
         System.out.println("----------------------------------------");
         muestraDatos(productos);
 
         // Recupera productos por etiqueta
-        String etiqueta = "Portátil";
+        String etiqueta = "Ligero";
         productos = repository.findByEtiqueta(etiqueta);
         System.out.println("Productos con etiqueta \""+etiqueta+"\":");
         System.out.println("----------------------------------------");

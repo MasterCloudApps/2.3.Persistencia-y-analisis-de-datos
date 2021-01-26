@@ -17,7 +17,8 @@ public class Empleado {
     String nombre;
 
     // Proyectos
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE } ) @JoinTable(name = "empleado_proyecto",
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    @JoinTable(name = "empleado_proyecto",
             joinColumns = @JoinColumn(name = "empleado_id"),
             inverseJoinColumns = @JoinColumn(name = "proyecto_id") )
     private List<Proyecto> proyectos = new ArrayList<>();

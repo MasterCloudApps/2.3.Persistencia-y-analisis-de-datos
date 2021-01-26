@@ -18,8 +18,8 @@ public class Producto {
     private String datos;
 
     // Historial de versiones
-//    @OneToMany(cascade=CascadeType.ALL, mappedBy="producto", fetch = FetchType.EAGER)
     @OneToMany(cascade=CascadeType.ALL, mappedBy="producto")
+//    @OneToMany(cascade=CascadeType.ALL, mappedBy="producto", fetch = FetchType.EAGER)
     private List<Version> versiones;
 
     public Producto() {
@@ -57,10 +57,10 @@ public class Producto {
     public String toString() {
 
         String strVersiones = "";
-        for (Version v : versiones) {
+  /*      for (Version v : versiones) {
             strVersiones += " [" + v.toString() + "] ";
         }
-
+*/
         return "Producto{" +
                 "id=" + id +
                 ", datos='" + datos + '\'' +
