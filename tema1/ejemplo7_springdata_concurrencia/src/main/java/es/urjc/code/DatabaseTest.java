@@ -1,7 +1,6 @@
 package es.urjc.code;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class DatabaseTest implements Runnable {
 
