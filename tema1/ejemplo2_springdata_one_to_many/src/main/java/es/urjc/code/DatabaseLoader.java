@@ -39,7 +39,14 @@ public class DatabaseLoader implements CommandLineRunner {
 
         // Recupera versiones
         List<Version> versionesFromDb = versionRepository.findAll();
-        System.out.println("Versiones con findAll():");
+
+        // Aunque se ejecute en modo LAZY, al hacer el "get" del producto sí se carga de la BD:
+        if (versionesFromDb.size() > 0) {
+            System.out.println("\nProducto de la 1ª versión cargada: " +
+                    versionesFromDb.get(0).getProducto().getDatos());
+        }
+
+        System.out.println("\nVersiones con findAll():");
         System.out.println("----------------------------------------");
         muestraDatos(versionesFromDb);
 
