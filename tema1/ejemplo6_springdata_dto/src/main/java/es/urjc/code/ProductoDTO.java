@@ -1,6 +1,8 @@
 package es.urjc.code;
 
 /**
+ * DTO como clase para utilizar JPQL
+ *
  * @author J. M. Colmenar
  */
 public class ProductoDTO {

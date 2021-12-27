@@ -41,30 +41,39 @@ public class DatabaseLoader implements CommandLineRunner {
         // Recupera productos
         List<Producto> productos = productoRepository.findAll();
         System.out.println("Productos con findAll():");
-        System.out.println("----------------------------------------");
-        muestraDatos(productos);
+        System.out.println("------------------------------------------");
+        productos.forEach(System.out::println);
+
+
+        // Implementación con JPQL -------------------------------------------------------
 
         // Proyección
         List<ProductoDTO> proy = productoRepository.findProductoProjection();
         System.out.println("ProductoDTO:");
-        System.out.println("----------------------------------------");
-        muestraDatos(proy);
+        System.out.println("------------------------------------------");
+        proy.forEach(System.out::println);
 
         // Proyección agregada
         List<ProductoDTO> stats = productoRepository.findProductoNumVersiones();
         System.out.println("ProductoDTO y número:");
-        System.out.println("----------------------------------------");
-        muestraDatos(stats);
+        System.out.println("------------------------------------------");
+        stats.forEach(System.out::println);
 
 
-    }
+        // Implementación con query nativa  --------------------------------------------------
 
+        // Proyección
+        List<IProductoDTO> proy2 = productoRepository.findProductoProjectionInterface();
+        System.out.println("ProductoDTO (nativa con interfaz):");
+        System.out.println("------------------------------------------");
+        proy2.forEach(p -> System.out.println("Producto: '"+p.getDatos()+"'"));
 
-    private static void muestraDatos(List datos) {
-        for (Object p : datos) {
-            System.out.println(p);
-        }
-        System.out.println();
+        // Proyección agregada
+        List<IProductoDTO> stats2 = productoRepository.findProductoNumVersionesInterface();
+        System.out.println("ProductoDTO y número (nativa con interfaz):");
+        System.out.println("------------------------------------------");
+        stats2.forEach(p -> System.out.println("Producto: '"+p.getDatos()+"', Versiones: "+p.getNumero()));
+
     }
 
 }
