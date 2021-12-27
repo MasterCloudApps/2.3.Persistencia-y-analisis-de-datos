@@ -1,9 +1,6 @@
 package es.urjc.code;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Entidad Producto.
@@ -17,6 +14,7 @@ public class Producto {
     private long id;
 
     // El objeto JSON se maneja como String en la entidad
+    @Column(columnDefinition="json")
     private String datos;
 
 
