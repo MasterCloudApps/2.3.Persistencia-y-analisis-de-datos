@@ -20,22 +20,25 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     private ProductoRepository productoRepository;
 
+    @Autowired
+    private DatabaseTest2 otroBean;
+
+    final int NUM_PRODS = 10000;
+
     @Override
     public void run(String... args) throws ParseException, InterruptedException {
-
-        final int NUM_PRODS = 10000;
 
         // Creación de datos
         ArrayList<Producto> prods1 = creaProductos(NUM_PRODS);
         ArrayList<Producto> prods2 = creaProductos(NUM_PRODS);
                 
-        DatabaseTest dbTest = new DatabaseTest(productoRepository,NUM_PRODS/4);
-
         System.out.println("\nGuardando datos:");
         long start, time;
 
 
-        /* Primera parte: save vs saveAll --------------------------- */
+        /* Save vs saveAll --------------------------- */
+
+        DatabaseTest dbTest = new DatabaseTest(productoRepository,NUM_PRODS/4,true,null);
 
         // Guardando datos:
         // De uno en uno
@@ -50,7 +53,50 @@ public class DatabaseLoader implements CommandLineRunner {
         time = (System.currentTimeMillis()-start)/1000;
         System.out.println("\n"+NUM_PRODS+" productos, en array \t->\t"+time+" seg.");
 
-        /* Segunda parte: hebras y transacciones --------------------------- * /
+
+        /* Hebras y transacciones --------------------------- */
+
+        /* Ejecución paralela mismo bean --------------------------- * /
+
+        DatabaseTest dbTest2 = new DatabaseTest(productoRepository,NUM_PRODS/4,true,null);
+        System.out.println("\nComitea de uno en uno, se ven diferentes conteos");
+        ejecucionConcurrente(dbTest2);
+
+        DatabaseTest dbTest3 = new DatabaseTest(productoRepository,NUM_PRODS/4,false,null);
+        System.out.println("\nComitea todos a la vez, no se ven entre sí");
+        ejecucionConcurrente(dbTest3);
+
+        /* Ejecución paralela otro bean, mismo código pero con anotación @Transactional ---------------- * /
+        // @Transactional solamente funciona si se invoca desde otro bean
+        DatabaseTest dbTest4 = new DatabaseTest(productoRepository,NUM_PRODS/4,true,otroBean);
+        System.out.println("\nComitea de uno en uno en otro bean, diferentes conteos");
+        ejecucionConcurrente(dbTest4);
+
+        DatabaseTest dbTest5 = new DatabaseTest(productoRepository,NUM_PRODS/4,false,otroBean);
+        System.out.println("\nComitea de uno en uno con trasactional (todos a la vez) en otro bean, no se ven entre sí");
+        ejecucionConcurrente(dbTest5);
+
+
+        /* */
+
+        System.out.println("\nTotal de productos en la BD: "+productoRepository.numProductos()+"\n");
+    }
+
+
+    private ArrayList<Producto> creaProductos(int n) {
+
+        ArrayList<Producto> prods = new ArrayList<>(n);
+        for (int i=0; i<n; i++) {
+            Producto p1 = new Producto("Producto " + i);
+            prods.add(p1);
+        }
+        return prods;
+
+    }
+
+
+    private void ejecucionConcurrente(DatabaseTest dbTest) throws ParseException, InterruptedException {
+        long start, time;
 
         // Concurrencia
         Thread th1 = new Thread(dbTest);
@@ -78,20 +124,7 @@ public class DatabaseLoader implements CommandLineRunner {
         th4.join();
         time = (System.currentTimeMillis()-start)/1000;
         System.out.println("\n"+NUM_PRODS+" productos, en 4 hebras \t->\t"+time+" seg.\n");
-
-        /* */
     }
 
-
-    private ArrayList<Producto> creaProductos(int n) {
-
-        ArrayList<Producto> prods = new ArrayList<>(n);
-        for (int i=0; i<n; i++) {
-            Producto p1 = new Producto("Producto " + i);
-            prods.add(p1);
-        }
-        return prods;
-
-    }
 
 }
