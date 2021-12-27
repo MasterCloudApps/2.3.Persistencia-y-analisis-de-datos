@@ -18,6 +18,11 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     // Consulta por una etiqueta dada (hacen falta las comillas)
     @Query("select p from Producto p where FUNCTION('JSON_CONTAINS',p.datos, " +
-           "CONCAT('\"',?1,'\"'),'$.etiquetas') = 1")
+            "JSON_QUOTE(?1),'$.etiquetas') = 1")
     List<Producto> findByEtiqueta(String etiqueta);
+
+    // Alternativa: usar el CONCAT
+    //    @Query("select p from Producto p where FUNCTION('JSON_CONTAINS',p.datos, " +
+    //           "CONCAT('\"',?1,'\"'),'$.etiquetas') = 1")
+
 }
