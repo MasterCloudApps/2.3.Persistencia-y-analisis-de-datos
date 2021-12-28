@@ -1,9 +1,6 @@
 package es.urjc.code;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Entidad Producto.
@@ -16,6 +13,7 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(columnDefinition="json")
     private String datos;
 
 
