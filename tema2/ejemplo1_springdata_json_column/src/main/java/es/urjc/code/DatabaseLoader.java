@@ -57,6 +57,12 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("----------------------------------------");
         productos.forEach(System.out::println);
 
+        marca = "Apple";
+        productos = repository.findByMarcaNativa(marca);
+        System.out.println("\nProductos "+marca+":");
+        System.out.println("----------------------------------------");
+        productos.forEach(System.out::println);
+
         // Recupera productos por etiqueta
         String etiqueta = "Ligero";
         productos = repository.findByEtiqueta(etiqueta);

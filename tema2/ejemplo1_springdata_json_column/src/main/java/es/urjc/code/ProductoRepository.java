@@ -16,6 +16,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     @Query("select p from Producto p where FUNCTION('JSON_EXTRACT',p.datos,'$.marca') = ?1")
     List<Producto> findByMarca(String marca);
 
+    // Consulta por la marca del campo datos consulta nativa
+    @Query(value = "select * from producto p where JSON_EXTRACT(p.datos,'$.marca') = ?1", nativeQuery = true)
+    List<Producto> findByMarcaNativa(String marca);
+
     // Consulta por una etiqueta dada (hacen falta las comillas)
     @Query("select p from Producto p where FUNCTION('JSON_CONTAINS',p.datos, " +
             "JSON_QUOTE(?1),'$.etiquetas') = 1")
