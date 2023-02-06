@@ -1,6 +1,6 @@
 package es.urjc.code;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 import java.util.Date;
 
 /**
