@@ -1,6 +1,6 @@
 package es.urjc.code;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 /**
