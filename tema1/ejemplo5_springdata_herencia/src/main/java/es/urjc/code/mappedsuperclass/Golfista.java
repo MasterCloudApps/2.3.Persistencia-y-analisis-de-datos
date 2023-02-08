@@ -1,6 +1,6 @@
 package es.urjc.code.mappedsuperclass;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class Golfista extends Jugador {

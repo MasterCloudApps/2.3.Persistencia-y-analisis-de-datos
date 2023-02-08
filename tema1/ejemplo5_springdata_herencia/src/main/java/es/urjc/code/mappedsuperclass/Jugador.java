@@ -1,6 +1,6 @@
 package es.urjc.code.mappedsuperclass;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

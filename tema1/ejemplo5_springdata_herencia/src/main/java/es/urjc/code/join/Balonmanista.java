@@ -1,6 +1,6 @@
 package es.urjc.code.join;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class Balonmanista extends Jugador {

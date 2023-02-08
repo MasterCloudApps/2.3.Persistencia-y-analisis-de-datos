@@ -13,7 +13,7 @@ import java.util.List;
 public interface JugadorRepository extends JpaRepository<Jugador, Long> {
 
     // Consulta por la marca del campo datos
-    @Query("select g from Jugador g where dtype = 'Golfista'")
+    @Query(value = "select * from Jugador where dtype = 'Golfista'",nativeQuery = true)
     List<Golfista> findGolfistas();
 
 }

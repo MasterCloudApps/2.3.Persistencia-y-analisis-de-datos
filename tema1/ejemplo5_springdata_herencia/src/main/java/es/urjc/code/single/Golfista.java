@@ -1,6 +1,6 @@
 package es.urjc.code.single;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class Golfista extends Jugador {
