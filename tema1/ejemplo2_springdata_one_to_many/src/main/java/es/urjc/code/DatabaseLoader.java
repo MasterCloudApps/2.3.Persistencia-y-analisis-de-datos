@@ -48,22 +48,15 @@ public class DatabaseLoader implements CommandLineRunner {
 
         System.out.println("\nVersiones con findAll():");
         System.out.println("----------------------------------------");
-        muestraDatos(versionesFromDb);
+        versionesFromDb.forEach(System.out::println);
 
         // Recupera productos
         List<Producto> productos = productoRepository.findAll();
         System.out.println("Productos con findAll():");
         System.out.println("----------------------------------------");
-        muestraDatos(productos);
+        productos.forEach(System.out::println);
 
     }
 
-
-    private static void muestraDatos(List datos) {
-        for (Object p : datos) {
-            System.out.println(p);
-        }
-        System.out.println();
-    }
 
 }
