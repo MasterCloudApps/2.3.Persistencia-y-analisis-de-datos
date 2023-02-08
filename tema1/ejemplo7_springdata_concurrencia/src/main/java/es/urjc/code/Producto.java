@@ -1,7 +1,6 @@
 package es.urjc.code;
 
-import javax.persistence.*;
-import java.util.List;
+import jakarta.persistence.*;
 
 /**
  * Entidad Producto.
