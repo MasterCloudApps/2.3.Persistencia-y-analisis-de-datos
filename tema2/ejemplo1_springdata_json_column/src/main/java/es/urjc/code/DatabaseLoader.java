@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
-import javax.xml.bind.SchemaOutputResolver;
 
 /**
  * Cargador de la BD y ejemplos de consulta.
