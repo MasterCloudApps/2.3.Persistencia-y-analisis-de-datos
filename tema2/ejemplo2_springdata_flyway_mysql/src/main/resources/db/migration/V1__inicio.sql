@@ -1,6 +1,8 @@
-CREATE TABLE `hibernate_sequence` (
-    `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB;
+-- Tabla para secuencia de productos
+create table producto_seq
+(
+    next_val bigint null
+);
 
 -- Tabla de productos
 CREATE TABLE `producto` (
@@ -8,6 +10,9 @@ CREATE TABLE `producto` (
     `datos` JSON NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+
+
 
 -- Diferentes opciones para insertar datos: string o función JSON
 INSERT INTO `producto`(`datos`) VALUES ('{\"nombre\": \"Macbook\", \"marca\": \"Apple\", \"etiquetas\":[\"Portátil\",\"Mac\"]}');
